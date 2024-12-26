@@ -146,8 +146,6 @@ useEffect(() => {
 
   const resetGame = () => {
     setStep('config');
-    setPlayers(3);
-    setSpies(1);
     setAssignments([]);
     setCurrentPlayer(0);
     setReveal(false);
