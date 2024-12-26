@@ -6,37 +6,69 @@ import { Picker } from "@react-native-picker/picker";
 
 export default function App() {
   const [themes, setThemes] = useState({
-    Futbolistas: [
+    "Futbolistas": [
       "Messi", "Cristiano Ronaldo", "Neymar", "Mbappé", "Zidane", "Pele", "Maradona", "Benzema", "Suarez", "Lewandowski",
       "Modric", "Salah", "Van Dijk", "Ronaldo Nazário", "Beckham", "Dibu Martinez", "Iniesta", "Xavi", "Buffon", "Puyol",
       "Kante", "Kroos", "Gareth Bale", "Di Stefano", "Roberto Carlos", "Kaká", "Ronaldinho", "Di María", "Mascherano", "Vinicius Jr"
     ],
-    Artistas: [
+    "Artistas Internacionales": [
       "Taylor Swift", "Eminem", "The Beatles", "Michael Jackson", "Beyoncé", "Ariana Grande", "Drake", "Kendrick Lamar", 
       "Madonna", "Billie Eilish", "Ed Sheeran", "Lady Gaga", "Bruno Mars", "Shakira", "Rihanna", "Justin Bieber", 
       "Adele", "Post Malone", "The Weeknd", "Travis Scott", "Kanye West", "Coldplay", "Eros Ramazzotti", "Elton John", 
       "Nirvana", "The Rolling Stones", "Nicki Minaj", "Pink Floyd", "Dua Lipa", "Harry Styles"
     ],
-    Paises: [
+    "Paises": [
       "Argentina", "Brasil", "Japón", "Francia", "España", "Alemania", "Italia", "México", "Estados Unidos", "Colombia", 
       "Chile", "Perú", "Uruguay", "Portugal", "Inglaterra", "Países Bajos", "Bélgica", "Croacia", "Polonia", "Suecia", 
       "Noruega", "Australia", "Canadá", "Rusia", "China", "India", "Arabia Saudita", "Sudáfrica", "Corea del Sur", 
       "Egipto", "Nueva Zelanda"
     ],
-    Peliculas: [
+    "Peliculas": [
       "The Godfather", "Cars", "Batman: The Dark Knight", "Pulp Fiction", "Forrest Gump", "Inception", "Fight Club", 
       "The Matrix", "Shrek", "The Lion King", "Back to the Future", "Interstellar", "Gladiator", "Titanic", 
       "The Silence of the Lambs", "Ratatouille", "Schindler's List", "Scary Movie", "Jurassic Park", "Star Wars", 
       "The Lord of the Rings: The Fellowship of the Ring", "Toy Story", "Memento", "Avatar", "Casablanca", 
       "The Avengers", "The Terminator", "Oppenheimer", "Finding Nemo", "Kung Fu Panda", "Taxi Driver"
     ],
-    Actores: [
+    "Actores": [
       "Leonardo DiCaprio", "Morgan Freeman", "Tom Hanks", "Brad Pitt", "Will Smith", "Johnny Depp", "Denzel Washington", 
       "Robert Downey Jr.", "Matt Damon", "Tom Cruise", "Ryan Reynolds", "Joaquin Phoenix", "Christian Bale", "Kevin Hart", 
       "Meryl Streep", "Angelina Jolie", "Scarlett Johansson", "Ana de Armas", "Emma Stone", "Jennifer Lawrence", 
       "Robert Pattinson", "Matthew McConaughey", "Hugh Jackman", "Robert De Niro", "Samuel L. Jackson", "Keanu Reeves", 
       "Natalie Portman", "Anne Hathaway", "Adam Sandler", "Al Pacino", "Jack Nicholson"
-    ]
+    ],
+    "Comidas": [
+  "Pizza", "Hamburguesa", "Ensalada", "Sushi", "Tacos", "Chocotorta", "Ceviche", "Empanadas", "Sopa", "Sandwich",
+  "Pollo al horno", "Arroz con pollo", "Fideos", "Arepas", "Kebab", "Guacamole", "Vitel toné", "Locro",
+  "Hot dog", "Panqueques", "Waffles", "Ravioles", "Milanesa", "Tarta de manzana", "Paella", "Lasaña", "Rollitos de primavera",
+  "Guiso", "Asado", "Helado"
+   ],
+   "Transporte": [
+  "Bicicleta", "Auto", "Motocicleta", "Avión", "Barco", "Tren", "Bondi", "Subte", "Camión", "Taxi",
+  "Tractor", "Monopatín", "Patines", "Helicóptero", "Submarino", "Furgoneta", "Carro eléctrico", "Camioneta", "Moto acuática",
+  "Globo aerostático", "Limusina", "Caravana", "Transbordador espacial", "Tren bala", "Tranvía", "Bote de remos", "Canoa",
+  "Yate", "Triciclo", "Carretilla"
+],
+  "Electrodomésticos": [
+  "Televisión", "Lavarropas", "Heladera", "Microondas", "Horno eléctrico", "Tostadora", "Pava eléctrica", "Batidora", 
+  "Secarropas", "Licuadora", "Plancha", "Ventilador de pie", "Aire acondicionado", "Calefactor", "Cafetera", 
+  "Extractor de jugos", "Alarma de seguridad", "Parrilla eléctrica", "Despertador digital", "Purificador de agua", "Humidificador", 
+  "Secador de cabello", "Cepillo alisador", "Aspiradora", "Freezer", "Proyector LED", "Horno pizzero", "Cámara de seguridad", 
+  "Máquina de coser", "Freidora"
+],
+"Animales": [
+  "Perro", "Gato", "Caballo", "Vaca", "Oveja", "Cerdo", "Gallina", "Pato", "Conejo", "Zorro", 
+  "León", "Tigre", "Elefante", "Jirafa", "Mono", "Águila", "Tiburón", "Delfín", "Ballena", "Cocodrilo", 
+  "Serpiente", "Pingüino", "Lobo", "Oso", "Rinoceronte", "Camello", "Canguro", "Tortuga", "Cisne", "Búho"
+],
+"Naturaleza": [
+  "Selva", "Cactus", "Montaña", "Dunas", "Río", 
+  "Tronco", "Cascada", "Valle", "Palmeras", "Oasis", 
+  "Acantilado", "Cueva", "Llanura", "Bosque", "Laguna", 
+  "Árbol", "Colina", "Desierto", "Roca", "Humedal", 
+  "Cañón", "Pradera", "Manantial", "Cima", "Lago", 
+  "Estepa", "Glaciar", "Arroyo", "Iceberg", "Volcán"
+]
   });
   const [step, setStep] = useState('config');
   const [selectedThemes, setSelectedThemes] = useState([]);
@@ -287,7 +319,7 @@ useEffect(() => {
         <View style={styles.row}>
           <TouchableOpacity
             style={[styles.controlButton, { backgroundColor: 'red' }]}
-            onPress={() => setSpies(Math.max(1, spies - 1))}
+            onPress={() => setSpies(Math.max(0, spies - 1))}
           >
             <Text style={styles.controlButtonText}>-</Text>
           </TouchableOpacity>
