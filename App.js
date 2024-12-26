@@ -6,24 +6,38 @@ import { Picker } from "@react-native-picker/picker";
 
 export default function App() {
   const [themes, setThemes] = useState({
-  Futbolistas: [
-    "Messi", "Cristiano Ronaldo", "Neymar", "Mbappé", "Zidane", "Pele", "Maradona", "Benzema", "Suarez", "Lewandowski",
-    "Modric", "Salah", "Van Dijk", "Ronaldo Nazário", "Beckham", "Dibu Martinez", "Iniesta", "Xavi", "Buffon", "Puyol",
-    "Kante", "Kroos", "Gareth Bale", "Luis Figo", "Roberto Carlos", "Kaká", "Ronaldinho", "Di MarÍa", "Mascherano", "Vinicius Jr"
-  ],
-  Artistas: [
-    "Taylor Swift", "Eminem", "The Beatles", "Michael Jackson", "Beyoncé", "Ariana Grande", "Drake", "Kendrick Lamar", 
-    "Madonna", "Billie Eilish", "Ed Sheeran", "Lady Gaga", "Bruno Mars", "Shakira", "Rihanna", "Justin Bieber", 
-    "Adele", "Post Malone", "The Weeknd", "Travis Scott", "Kanye West", "Coldplay", "Eros Ramazzotti", "Elton John", 
-    "Nirvana", "The Rolling Stones", "Nicki Minaj", "Pink Floyd", "Dua Lipa", "Harry Styles"
-  ],
-  Paises: [
-    "Argentina", "Brasil", "Japón", "Francia", "España", "Alemania", "Italia", "México", "Estados Unidos", "Colombia", 
-    "Chile", "Perú", "Uruguay", "Portugal", "Inglaterra", "Países Bajos", "Bélgica", "Croacia", "Polonia", "Suecia", 
-    "Noruega", "Australia", "Canadá", "Rusia", "China", "India", "Arabia Saudita", "Sudáfrica", "Corea del Sur", 
-    "Egipto", "Nueva Zelanda"
-  ],
-});
+    Futbolistas: [
+      "Messi", "Cristiano Ronaldo", "Neymar", "Mbappé", "Zidane", "Pele", "Maradona", "Benzema", "Suarez", "Lewandowski",
+      "Modric", "Salah", "Van Dijk", "Ronaldo Nazário", "Beckham", "Dibu Martinez", "Iniesta", "Xavi", "Buffon", "Puyol",
+      "Kante", "Kroos", "Gareth Bale", "Di Stefano", "Roberto Carlos", "Kaká", "Ronaldinho", "Di María", "Mascherano", "Vinicius Jr"
+    ],
+    Artistas: [
+      "Taylor Swift", "Eminem", "The Beatles", "Michael Jackson", "Beyoncé", "Ariana Grande", "Drake", "Kendrick Lamar", 
+      "Madonna", "Billie Eilish", "Ed Sheeran", "Lady Gaga", "Bruno Mars", "Shakira", "Rihanna", "Justin Bieber", 
+      "Adele", "Post Malone", "The Weeknd", "Travis Scott", "Kanye West", "Coldplay", "Eros Ramazzotti", "Elton John", 
+      "Nirvana", "The Rolling Stones", "Nicki Minaj", "Pink Floyd", "Dua Lipa", "Harry Styles"
+    ],
+    Paises: [
+      "Argentina", "Brasil", "Japón", "Francia", "España", "Alemania", "Italia", "México", "Estados Unidos", "Colombia", 
+      "Chile", "Perú", "Uruguay", "Portugal", "Inglaterra", "Países Bajos", "Bélgica", "Croacia", "Polonia", "Suecia", 
+      "Noruega", "Australia", "Canadá", "Rusia", "China", "India", "Arabia Saudita", "Sudáfrica", "Corea del Sur", 
+      "Egipto", "Nueva Zelanda"
+    ],
+    Peliculas: [
+      "The Godfather", "Cars", "Batman: The Dark Knight", "Pulp Fiction", "Forrest Gump", "Inception", "Fight Club", 
+      "The Matrix", "Shrek", "The Lion King", "Back to the Future", "Interstellar", "Gladiator", "Titanic", 
+      "The Silence of the Lambs", "Ratatouille", "Schindler's List", "Scary Movie", "Jurassic Park", "Star Wars", 
+      "The Lord of the Rings: The Fellowship of the Ring", "Toy Story", "Memento", "Avatar", "Casablanca", 
+      "The Avengers", "The Terminator", "Oppenheimer", "Finding Nemo", "Kung Fu Panda", "Taxi Driver"
+    ],
+    Actores: [
+      "Leonardo DiCaprio", "Morgan Freeman", "Tom Hanks", "Brad Pitt", "Will Smith", "Johnny Depp", "Denzel Washington", 
+      "Robert Downey Jr.", "Matt Damon", "Tom Cruise", "Ryan Reynolds", "Joaquin Phoenix", "Christian Bale", "Kevin Hart", 
+      "Meryl Streep", "Angelina Jolie", "Scarlett Johansson", "Ana de Armas", "Emma Stone", "Jennifer Lawrence", 
+      "Robert Pattinson", "Matthew McConaughey", "Hugh Jackman", "Robert De Niro", "Samuel L. Jackson", "Keanu Reeves", 
+      "Natalie Portman", "Anne Hathaway", "Adam Sandler", "Al Pacino", "Jack Nicholson"
+    ]
+  });
   const [step, setStep] = useState('config');
   const [selectedThemes, setSelectedThemes] = useState([]);
   const [players, setPlayers] = useState(3);
@@ -40,26 +54,62 @@ export default function App() {
   const [wordsList, setWordsList] = useState([]);
 
   useEffect(() => {
-    // Intentar leer los datos de AsyncStorage cuando el componente se monta
-    const loadThemes = async () => {
-      try {
-        const savedThemes = await AsyncStorage.getItem('themes');
-        if (savedThemes) {
-          setThemes(JSON.parse(savedThemes));  // Si hay datos, usarlos
-        } 
-      } catch (error) {
-        console.error("Error loading themes from AsyncStorage", error);
-      }
-    };
-    
-    loadThemes();
-  }, []);
+  const loadThemes = async () => {
+    try {
+      // Intentamos cargar ambos datos (temas y temas seleccionados)
+      const savedThemes = await AsyncStorage.getItem('themes');
+      const savedSelectedThemes = await AsyncStorage.getItem('selectedThemes');
 
+      if (savedThemes && savedSelectedThemes) {
+        // Si ambos existen, usamos los valores guardados
+        const loadedThemes = JSON.parse(savedThemes);
+        const loadedSelectedThemes = JSON.parse(savedSelectedThemes);
+
+
+        setThemes(loadedThemes);
+        setSelectedThemes(loadedSelectedThemes);
+      } else {
+        // Si no hay nada guardado, inicializamos con los valores predeterminados
+        console.log("No saved themes or selected themes, initializing with defaults");
+
+        setThemes(themes);
+        setSelectedThemes(Object.keys(themes));
+
+        // Guardamos los valores predeterminados en AsyncStorage
+        await AsyncStorage.setItem('themes', JSON.stringify(themes));
+        await AsyncStorage.setItem('selectedThemes', JSON.stringify(Object.keys(themes)));
+
+      }
+    } catch (error) {
+      console.error("Error loading themes or selectedThemes from AsyncStorage", error);
+    }
+  };
+
+  loadThemes();
+}, []);
+
+// Para guardar los temas seleccionados
+useEffect(() => {
+  const saveSelectedThemes = async () => {
+    try {
+    
+      await AsyncStorage.setItem('selectedThemes', JSON.stringify(selectedThemes));
+    } catch (error) {
+      console.error("Error saving selectedThemes to AsyncStorage", error);
+    }
+  };
+
+  // Solo guardamos si hay un cambio en los temas seleccionados
+  if (selectedThemes.length > 0) {
+    saveSelectedThemes();
+  }
+}, [selectedThemes]);
 
   useEffect(() => {
     // Guardar los temas en AsyncStorage cada vez que 'themes' cambie
     const saveThemes = async () => {
       try {
+      
         await AsyncStorage.setItem('themes', JSON.stringify(themes));
       } catch (error) {
         console.error("Error saving themes to AsyncStorage", error);
@@ -96,7 +146,6 @@ export default function App() {
 
   const resetGame = () => {
     setStep('config');
-    setSelectedThemes([]);
     setPlayers(3);
     setSpies(1);
     setAssignments([]);
@@ -163,7 +212,9 @@ export default function App() {
         onPress: () => {
           const updatedThemes = { ...themes };
           delete updatedThemes[selectedTheme]; // Eliminar la temática seleccionada
+          const updatedSelectedThemes = selectedThemes.filter(theme => theme !== selectedTheme);
           setThemes(updatedThemes); // Actualizar el estado
+          setSelectedThemes(updatedSelectedThemes);
           setModalVisible(false); // Cerrar el modal
         },
       },
@@ -172,17 +223,6 @@ export default function App() {
   );
 };
 
-   const renderThemeItem = ({ item }) => (
-    <TouchableOpacity
-      onPress={() => {
-        setSelectedTheme(item);
-        setModalVisible(true);
-      }}
-      style={styles.button}
-    >
-      <Text style={styles.buttonText}>{item}</Text>
-    </TouchableOpacity>
-  );
 
   if (step === 'config') {
     return (
@@ -255,7 +295,7 @@ export default function App() {
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.controlButton, { backgroundColor: 'green' }]}
-            onPress={() => setSpies(Math.min(players - 1, spies + 1))}
+            onPress={() => setSpies(Math.min(players, spies + 1))}
           >
             <Text style={styles.controlButtonText}>+</Text>
           </TouchableOpacity>
@@ -326,6 +366,21 @@ export default function App() {
     <View style={styles.modalContent}>
       <Text style={styles.modalTitle}>{selectedTheme}</Text>
 
+      <FlatList
+  data={themes[selectedTheme]}
+  keyExtractor={(item) => item}
+  renderItem={({ item }) => (
+    <View style={styles.wordContainer}>
+      <Text style={styles.word}>{item}</Text>
+      <TouchableOpacity onPress={() => handleDeleteWord(item)}>
+        <Text style={styles.deleteText}>Eliminar</Text>
+      </TouchableOpacity>
+    </View>
+  )}
+  style={styles.scrollList} // Aplicando el estilo para limitar la altura
+  scrollEnabled={true} // Habilita el desplazamiento si es necesario
+/>
+
       {/* Campo para agregar una palabra */}
       <TextInput
         style={styles.input}
@@ -342,20 +397,6 @@ export default function App() {
         <Text style={styles.bigButtonText}>Agregar Palabra</Text>
       </TouchableOpacity>
 
-            <FlatList
-  data={themes[selectedTheme]}
-  keyExtractor={(item) => item}
-  renderItem={({ item }) => (
-    <View style={styles.wordContainer}>
-      <Text style={styles.word}>{item}</Text>
-      <TouchableOpacity onPress={() => handleDeleteWord(item)}>
-        <Text style={styles.deleteText}>Eliminar</Text>
-      </TouchableOpacity>
-    </View>
-  )}
-  style={styles.scrollList} // Aplicando el estilo para limitar la altura
-  scrollEnabled={true} // Habilita el desplazamiento si es necesario
-/>
 
             <TouchableOpacity
         style={[styles.bigButton, { backgroundColor: '#f44336' }]}
@@ -603,7 +644,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 
-  // Estilos para la revelación de roles
   revealContainer: {
     alignItems: 'center',
   },
@@ -662,8 +702,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   scrollList: {
-    maxHeight: 200,  // Ajusta la altura máxima a tu preferencia
+    maxHeight: 200,  
     width: '100%',
+    marginBottom: 10,
   },
    picker: {
     height: 70,
@@ -673,5 +714,15 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     borderRadius: 10,
     backgroundColor: "#ffffff",
+  },
+    input: {
+    height: 50,
+    width: '80%',
+    borderWidth: 1, 
+    borderColor: '#000', 
+    borderRadius: 10, 
+    paddingHorizontal: 15, 
+    backgroundColor: '#fff', 
+    marginBottom: 10,
   },
 });
