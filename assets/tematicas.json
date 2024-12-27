@@ -4,5 +4,11 @@
   "Música": ["Pop", "Rock", "Clásica", "Jazz", "Reggaeton"],
   "Comida": ["Pizza", "Sushi", "Hamburguesa", "Tacos", "Pasta"],
   "Animales": ["Perro", "Gato", "León", "Elefante", "Jirafa"],
-  "Tecnología": ["Computadora", "Smartphone", "Internet", "Robots", "Inteligencia Artificial"]
+  "Tecnología": [
+    "Computadora",
+    "Smartphone",
+    "Internet",
+    "Robots",
+    "Inteligencia Artificial"
+  ]
 }
